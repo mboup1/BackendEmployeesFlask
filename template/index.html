@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2 class="text-center">Apprendre FLask</h2>
+
+{% if tasks %}
+<div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Prénom</th>
+        <th>Nom</th>
+        <th>Email</th>
+        <th>Date</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        {% for task in tasks %}
+        <th>{{task.id}}</th>
+        <th>{{task.firstName}}</th>
+        <th>{{task.name}}</th>
+        <th>{{task.email}}</th>
+        <th> {{task.created_at.date()}} </th>
+        <th>
+          <a href="/update/{{task.id}}/" class="btn btn-success">Modifier</a>
+          <a href="/delete/{{task.id}}" class="btn btn-danger">Supprimer</a>
+        </th>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+  <p>Pas de tâche à réaliser</p>
+  {% endif %}
+  {% include "partials/_form.html" %}
+</div>
+{% endblock content %}
