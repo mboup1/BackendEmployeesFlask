@@ -2,9 +2,10 @@
 
 {% block content %}
 
-<h2 class="text-center">Apprendre FLask</h2>
+<a href="{{ url_for('addform') }}" class="btn btn-primary m-2">Ajouter un employé</a>
+<h2 class="text-center">Liste des employés</h2>
 
-{% if tasks %}
+{% if persons %}
 <div>
   <table class="table">
     <thead>
@@ -14,20 +15,20 @@
         <th>Nom</th>
         <th>Email</th>
         <th>Date</th>
-        <th>Actions</th>
+        <th>Action</th>
       </tr>
     </thead>
     <tbody>
       <tr>
-        {% for task in tasks %}
-        <th>{{task.id}}</th>
-        <th>{{task.firstName}}</th>
-        <th>{{task.name}}</th>
-        <th>{{task.email}}</th>
-        <th> {{task.created_at.date()}} </th>
+        {% for person in persons %}
+        <th>{{person.id}}</th>
+        <th>{{person.firstName}}</th>
+        <th>{{person.name}}</th>
+        <th>{{person.email}}</th>
+        <th> {{person.created_at.date()}} </th>
         <th>
-          <a href="/update/{{task.id}}/" class="btn btn-success">Modifier</a>
-          <a href="/delete/{{task.id}}" class="btn btn-danger">Supprimer</a>
+          <a href="/update/{{person.id}}/" class="btn btn-success">Modifier</a>
+          <a href="/delete/{{person.id}}" class="btn btn-danger">Supprimer</a>
         </th>
       </tr>
       {% endfor %}
@@ -36,6 +37,6 @@
   {% else %}
   <p>Pas de tâche à réaliser</p>
   {% endif %}
-  {% include "partials/_form.html" %}
+  <!-- {% include "partials/_form.html" %} -->
 </div>
 {% endblock content %}

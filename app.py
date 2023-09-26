@@ -10,7 +10,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
 # Modèle SQLAlchemy
-class Task(db.Model):
+class Person(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     firstName = db.Column(db.String(80), nullable=False)
     name = db.Column(db.String(80), nullable=False)
@@ -30,57 +30,60 @@ def index():
         firstName = request.form['firstName']
         name = request.form['name']
         email = request.form['email']
-        new_task = Task(name=name, firstName=firstName, email=email)
+        new_person = Person(name=name, firstName=firstName, email=email)
         try:
-            db.session.add(new_task)
+            db.session.add(new_person)
             db.session.commit()
             return redirect("/")
         except Exception:
             return "Une erreur s'est produite lors de la sauvegarde"
     else:
-        tasks = Task.query.order_by(Task.created_at)
-    return render_template("index.html", tasks=tasks)
+        persons = Person.query.order_by(Person.created_at)
+    return render_template("index.html", persons=persons)
 
 # Mettre à jour une tâche
 @app.route("/update/<int:id>/", methods=["GET", "POST"])
 def update(id):
-    task = Task.query.get_or_404(id)
+    person = Person.query.get_or_404(id)
     if request.method == "POST":
-        task.firstName = request.form["firstName"]
-        task.name = request.form["name"]
-        task.email = request.form["email"]
+        person.firstName = request.form["firstName"]
+        person.name = request.form["name"]
+        person.email = request.form["email"]
         try:
             db.session.commit()
             return redirect("/")
         except Exception:
-            return "Nous ne pouvons pas modifier la tâche"
+            return "Nous ne pouvons pas modifier les"
     else:
         title = "Mise à jour"
-        return render_template("update.html", title=title, task=task)
-
-
+        return render_template("update.html", title=title, person=person)
 
 # Suprrimer une tâche
 @app.route("/delete/<int:id>/")
 def delete(id):
-    task = Task.query.get_or_404(id)
+    person = Person.query.get_or_404(id)
     try:
-        db.session.delete(task)
+        db.session.delete(person)
         db.session.commit()
         return redirect("/")
     except Exception:
         return "Une erreur s'est produite"
 
+# A propos de ...
 @app.route('/about/')
 def about():
     return render_template("about.html")
 
-@app.route('/add-task/<name>/<firstName>/<email>/', methods=['GET'])
-def add_task(name, firstName, email):
-    new_task = Task(name=name, firstName=firstName, email=email)
-    db.session.add(new_task)
+@app.route('/addform/')
+def addform():
+    return render_template("addform.html")
+
+@app.route('/add-person/<name>/<firstName>/<email>/', methods=['GET'])
+def add_person(name, firstName, email):
+    new_person = Person(name=name, firstName=firstName, email=email)
+    db.session.add(new_person)
     db.session.commit()
-    return f'Task: {firstName} {name} {email} has been created successfully!'
+    return f'Person: {firstName} {name} {email} has been created successfully!'
 
 if __name__ == '__main__':
     with app.app_context():
