@@ -2,3 +2,15 @@ body{
     background-color:lightgoldenrodyellow;
     /* color: blue; */
 }
+
+#footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #333;
+    color: #fff;
+    padding: 20px 0;
+    text-align: center;
+    margin-top: 100px;
+}

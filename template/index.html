@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<a href="{{ url_for('addform') }}" class="btn btn-primary m-2">Ajouter un employé</a>
+<a href="{{ url_for('addForm') }}" class="btn btn-primary m-2">Ajouter un employé</a>
 <h2 class="text-center">Liste des employés</h2>
 
 {% if persons %}
@@ -37,6 +37,5 @@
   {% else %}
   <p>Pas de tâche à réaliser</p>
   {% endif %}
-  <!-- {% include "partials/_form.html" %} -->
 </div>
 {% endblock content %}
