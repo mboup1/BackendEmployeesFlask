@@ -4,6 +4,7 @@
 
 <a href="{{ url_for('addForm') }}" class="btn btn-primary m-2">Ajouter un employé</a>
 <h2 class="text-center">Liste des employés</h2>
+<img src="./images/APPLE-IPHONE-13-PRO-MAX.jpg" alt="" srcset="" style="width: 75px; border-radius: 50%;">
 
 {% if personsIndex %}
 <div>
@@ -13,17 +14,19 @@
         <th>Id</th>
         <th>Prénom</th>
         <th>Nom</th>
-        <th>Email</th>
+        <th >Email</th>
+        <th>Image</th>
         <th>Action</th>
       </tr>
     </thead>
     <tbody>
-      <tr>
+      <tr class="align-middle">
         {% for person in personsIndex %}
         <th>{{loop.index}}</th>
         <th>{{person.firstName}}</th>
         <th>{{person.name}}</th>
-        <th>{{person.email}}</th>
+        <th >{{person.email}}</th>
+        <th><img src="../static/images/Photo d'identité MBOUP Dame.jpg" alt="" srcset="" style="width: 100px;height:100px ;border-radius: 50%;"></th>
         <th>
           <a href="/update/{{person.id}}/" class="btn btn-success">Modifier</a>
           <a href="/delete/{{person.id}}" class="btn btn-danger">Supprimer</a>
