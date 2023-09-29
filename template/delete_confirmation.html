@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="text-center">
+    <h2>Êtes-vous sûr de vouloir supprimer  {{ person.firstName }} {{ person.name }} ?</h2>
+    <form method="POST" action="/delete/{{ person.id }}/">
+        <div class="m-2">
+            <button type="submit" class="btn btn-danger">Confirmer</button>
+            <a href="/" class="btn btn-dark">Annuler</a>
+        </div>
+    </form>
+</div>
+{% endblock content %}

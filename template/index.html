@@ -5,7 +5,7 @@
 <a href="{{ url_for('addForm') }}" class="btn btn-primary m-2">Ajouter un employé</a>
 <h2 class="text-center">Liste des employés</h2>
 
-{% if persons %}
+{% if personsIndex %}
 <div>
   <table class="table">
     <thead>
@@ -14,18 +14,16 @@
         <th>Prénom</th>
         <th>Nom</th>
         <th>Email</th>
-        <th>Date</th>
         <th>Action</th>
       </tr>
     </thead>
     <tbody>
       <tr>
-        {% for person in persons %}
-        <th>{{person.id}}</th>
+        {% for person in personsIndex %}
+        <th>{{loop.index}}</th>
         <th>{{person.firstName}}</th>
         <th>{{person.name}}</th>
         <th>{{person.email}}</th>
-        <th> {{person.created_at.date()}} </th>
         <th>
           <a href="/update/{{person.id}}/" class="btn btn-success">Modifier</a>
           <a href="/delete/{{person.id}}" class="btn btn-danger">Supprimer</a>

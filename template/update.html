@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<h2 class="text-center mt-5">Modifier les données de {{ person.firstName }} {{ person.name }}</h2>
 <form action="/update/{{person.id}}/" method="POST">
     <div class="form-row container">
         <div class="col-sm-10 my-1">
@@ -15,12 +16,9 @@
             <label for="email">Email</label>
             <input type="text" name="email" id="email" class="form-control" value="{{ person.email }}">
         </div>
-        <div>
-            <div class="m-2">
-                <button type="submit" class="btn btn-primary">Modifier</button>
-                <!-- <button type="submit" class="btn btn-primary">Annuler</button> -->
-                <a href="{{ url_for('index') }}" class="btn btn-danger">Annuler</a>
-            </div>
+        <div class="m-2">
+            <button type="submit" class="btn btn-primary">Modifier</button>
+            <a href="/" class="btn btn-danger">Annuler</a>
         </div>
     </div>
 </form>
