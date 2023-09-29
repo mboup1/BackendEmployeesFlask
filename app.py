@@ -1,5 +1,7 @@
 from flask import Flask, request, render_template, redirect
 from flask_mysqldb import MySQL 
+import base64
+
 
 app = Flask(__name__, template_folder='./template')
 
@@ -11,6 +13,10 @@ app.config['MYSQL_DB'] = 'flask_db'
 
 mysql = MySQL(app)
 
+@app.template_filter('b64encode')
+def b64encode_filter(data):
+    return base64.b64encode(data).decode('utf-8')
+
 # Ajouter une personne
 @app.route('/', methods=["GET", "POST"])
 def index():
@@ -18,7 +24,7 @@ def index():
         firstName = request.form['firstName']
         name = request.form['name']
         email = request.form['email']
-        image = request.form['image']
+        image = request.files['image'].read()
         cur = mysql.connection.cursor()
         # cur.execute('''CREATE TABLE IF NOT EXISTS flask_array (
         #         id INT AUTO_INCREMENT PRIMARY KEY,
@@ -46,7 +52,7 @@ def update(id):
         firstName = request.form['firstName']
         name = request.form['name']
         email = request.form['email']
-        image = request.form['image']
+        image = request.files['image'].read()
         cur = mysql.connection.cursor()
         cur.execute(
             "UPDATE flask_array SET firstName = %s, name = %s, email = %s, image = %s WHERE id = %s",

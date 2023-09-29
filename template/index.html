@@ -20,14 +20,14 @@
       </tr>
     </thead>
     <tbody>
-      <tr class="align-middle">
+      <tr >
         {% for person in personsIndex %}
-        <th>{{loop.index}}</th>
-        <th>{{person.firstName}}</th>
-        <th>{{person.name}}</th>
-        <th >{{person.email}}</th>
-        <th><img src="../static/images/Photo d'identité MBOUP Dame.jpg" alt="" srcset="" style="width: 100px;height:100px ;border-radius: 50%;"></th>
-        <th>
+        <th class="align-middle">{{loop.index}}</th>
+        <th class="align-middle">{{person.firstName}}</th>
+        <th class="align-middle">{{person.name}}</th>
+        <th class="align-middle">{{person.email}}</th>
+        <th class="align-middle"><img src="data:image/*;base64,{{ person.image|b64encode }}" alt="" srcset="" style="width: 100px;height:100px ;border-radius: 50%;"></th>
+        <th class="align-middle">
           <a href="/update/{{person.id}}/" class="btn btn-success">Modifier</a>
           <a href="/delete/{{person.id}}" class="btn btn-danger">Supprimer</a>
         </th>
